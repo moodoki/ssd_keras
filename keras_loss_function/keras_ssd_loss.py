@@ -121,9 +121,10 @@ class SSDLoss:
         Returns:
             A scalar, the total multitask loss for classification and localization.
         '''
-        self.neg_pos_ratio = tf.constant(self.neg_pos_ratio)
-        self.n_neg_min = tf.constant(self.n_neg_min)
-        self.alpha = tf.constant(self.alpha)
+        #Not needed in tf2
+        #self.neg_pos_ratio = tf.constant(self.neg_pos_ratio)
+        #self.n_neg_min = tf.constant(self.n_neg_min)
+        #self.alpha = tf.constant(self.alpha)
 
         batch_size = tf.shape(y_pred)[0] # Output dtype: tf.int32
         n_boxes = tf.shape(y_pred)[1] # Output dtype: tf.int32, note that `n_boxes` in this context denotes the total number of boxes per image, not the number of boxes per cell.
@@ -190,7 +191,7 @@ class SSDLoss:
             neg_class_loss = tf.reduce_sum(classification_loss * negatives_keep, axis=-1) # Tensor of shape (batch_size,)
             return neg_class_loss
 
-        neg_class_loss = tf.cond(tf.equal(n_neg_losses, tf.constant(0)), f1, f2)
+        neg_class_loss = tf.cond(tf.equal(n_neg_losses, 0), f1, f2)
 
         class_loss = pos_class_loss + neg_class_loss # Tensor of shape (batch_size,)
 
