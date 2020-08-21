@@ -1,5 +1,14 @@
 ## SSD: Single-Shot MultiBox Detector implementation in Keras
 ---
+### Fork modifications
+
+Original implemtation was for Tensorflow 1.x and a separate Keras package. This fork has been
+updated to modern Tensorflow 2.x and built-in Keras. Notebooks can run in Colab
+
+#### Issues/TODO
+ - [ ] update to `tf.data` pipeline for better performance, existing generator/dataloader is mostly
+   synchronous CPU
+ - [ ] only SSD7 ported and tested
 ### Contents
 
 1. [Overview](#overview)
